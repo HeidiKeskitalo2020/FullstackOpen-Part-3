@@ -28,7 +28,14 @@ let persons =[
       }
 ]
 
-app.get('/api/persons', (req, res) => {
+app.get('/info', (req, res) => {
+    const info = `There is information of ${persons.length} people in the phonebook.`
+    const time = Date()
+
+    res.send(`<p>${info}</p> <p>${time}</P>`)
+})
+
+app.get(`/api/persons/`, (req, res) => {
     res.json(persons)
   })
   
