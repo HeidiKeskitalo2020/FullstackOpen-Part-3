@@ -7,7 +7,7 @@ const number = process.argv[4]
 const url =
   `mongodb+srv://fullstack:${password}@cluster0.jqeop.mongodb.net/persons-app?retryWrites=true&w=majority`
 
-mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true})  
+mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true})  
 
 if (process.argv.length<3) {
   console.log('give password as argument')
@@ -20,7 +20,7 @@ const personSchema = new mongoose.Schema({
 })
 const Person = mongoose.model('Person', personSchema)
 
-if (name === undefined || number === undefined) {
+if (name === 'undefined' || number === 'undefined') {
     Person
     .find({})
     .then(person => {
@@ -36,7 +36,7 @@ else
     number: number,
 })
 
-person.save().then(response => {
+person.save().then(result => {
   console.log(`person ${name} ${number} saved to phonebook`)
   mongoose.connection.close()
 })
