@@ -55,7 +55,7 @@ app.get('/info', (req, res) => {
     res.send(`<p>${info}</p> <p>${date}</P>`)
 })
 
-app.get('/api/persons/', (req, res) => {
+app.get('/api/persons', (req, res) => {
     Person.find({}).then(persons => {        
         res.json(persons.map(person => person.toJSON()))
     })
