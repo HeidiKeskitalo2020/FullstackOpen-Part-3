@@ -1,17 +1,13 @@
 const mongoose =require('mongoose')
-// eslint-disable-next-line no-undef
 const password =process.argv[2]
-// eslint-disable-next-line no-undef
 const name = process.argv[3]
-// eslint-disable-next-line no-undef
 const number = process.argv[4]
 const url = `mongodb+srv://fullstack:${password}@cluster0.jqeop.mongodb.net/persons-app?retryWrites=true&w=majority`
 mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true })
 
-// eslint-disable-next-line no-undef
+
 if (process.argv.length<3) {
   console.log('give password as argument')
-  // eslint-disable-next-line no-undef
   process.exit(1)
 }
 

@@ -4,7 +4,6 @@ const app = express()
 const morgan = require('morgan')
 const cors = require('cors')
 const Person = require('./models/person')
-//const { response } = require('express')
 
 
 app.use(express.static('build'))
@@ -124,7 +123,7 @@ const unknownEndpoint = (req, res) => {
   res.status(400).send({ error: 'unknown endpoint' })
 }
 app.use(unknownEndpoint)
-// eslint-disable-next-line no-undef
+
 const PORT = process.env.PORT
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
