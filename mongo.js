@@ -1,43 +1,43 @@
-const mongoose = require('mongoose')
-
-const password = process.argv[2]
+const mongoose =require('mongoose')
+// eslint-disable-next-line no-undef
+const password =process.argv[2]
+// eslint-disable-next-line no-undef
 const name = process.argv[3]
+// eslint-disable-next-line no-undef
 const number = process.argv[4]
+const url = `mongodb+srv://fullstack:${password}@cluster0.jqeop.mongodb.net/persons-app?retryWrites=true&w=majority`
+mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true })
 
-const url =
-  `mongodb+srv://fullstack:${password}@cluster0.jqeop.mongodb.net/persons-app?retryWrites=true&w=majority`
-
-mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true})  
-
+// eslint-disable-next-line no-undef
 if (process.argv.length<3) {
   console.log('give password as argument')
+  // eslint-disable-next-line no-undef
   process.exit(1)
 }
 
 const personSchema = new mongoose.Schema({
-    name: String,
-    number: String
+  name: String,
+  number: String
 })
 const Person = mongoose.model('Person', personSchema)
 
 if (name === 'undefined' || number === 'undefined') {
-    Person
+  Person
     .find({})
     .then(person => {
-        console.log('Phonebook:')
-        person.map(person => console.log(person.name, person.number))
-        mongoose.connection.close()
-})
+      console.log('Phonebook:')
+      person.map(person => console.log(person.name, person.number))
+      mongoose.connection.close()
+    })
 }
 else
 {
-    const person = new Person({
+  const person = new Person({
     name: name,
     number: number,
-})
-
-person.save().then(result => {
-  console.log(`person ${name} ${number} saved to phonebook`)
-  mongoose.connection.close()
-})
+  })
+  person.save().then(() => {
+    console.log(`person ${name} ${number} saved to phonebook`)
+    mongoose.connection.close()
+  })
 }
