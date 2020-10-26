@@ -4,7 +4,7 @@ const app = express()
 const morgan = require('morgan')
 const cors = require('cors')
 const Person = require('./models/person')
-const { response } = require('express')
+//const { response } = require('express')
 
 
 app.use(express.static('build'))
@@ -101,19 +101,12 @@ app.delete('/api/persons/:id', (req, res, next) => {
 
 app.post('/api/persons', (req, res, next) => {
     const body = req.body
-    if (body.content === undefined) {
-        return res.status(400).json({ error: 'content missing' })
-    }
-
+    
     if (body.name === undefined) {
-        return res.status(400).json({
-            error: 'name is missing!'
-        })
+        return res.status(400).json({ error: 'name is missing!' })
     }
     if (body.number === undefined) {
-        return res.status(400).json({
-            error: 'number is missing!'
-        })
+        return res.status(400).json({ error: 'number is missing!' })
     }
 
     const person = new Person ({
@@ -133,7 +126,7 @@ const errorHandler = (error, req, res, next) => {
     if (error.name === 'CastError') {
         return res.status(400).send({ error: 'malformed id'})
     } else if (error.name === 'ValidationError') {
-        return response.status(400).json({ error: error.message })
+        return res.status(400).json({ error: error.message })
     }
     next(error)
 }
